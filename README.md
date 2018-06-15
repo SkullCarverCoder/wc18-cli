@@ -27,16 +27,18 @@ $ pip install wc18-cli
 $ git clone https://github.com/SkullCarverCoder/wc18-cli.git
 $ cd wc18-cli
 $ python setup.py install
-
+```
 Usage
-====
+=====
+
 ### Get info of an specific Country
+
 ```bash
 $ wc18 --country=Japan # Japan is the name of the team desired to see stats
 ```
 
 
-###Get info of an specific Country plus all the matches
+### Get info of an specific Country plus all the matches
 
 ```bash
 $ wc18 --country=Russia --allmatches=True # Japan is the name of the team desired to see stats
