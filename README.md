@@ -4,7 +4,7 @@
 
 WC18 CLI
 =====
-[![PyPI version](https://badge.fury.io/py/wc18-cli.svg)](https://badge.fury.io/py/wc18-cli)(http://badge.fury.io/py/soccer-cli)
+[![PyPI version](https://badge.fury.io/py/wc18-cli.svg)](https://badge.fury.io/py/wc18-cli)
 
 An easy command line interface for the 2018 World Cup
 
