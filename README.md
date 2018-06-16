@@ -8,7 +8,7 @@ WC18 CLI
 
 An easy command line interface for the 2018 World Cup
 
-![](https://i.imgur.com/fpnrXUQ.gif)
+![](https://i.imgur.com/ylQ9kM3.gif)
 
 Install
 =====
@@ -33,30 +33,42 @@ $ python setup.py install
 Usage
 =====
 
-### Get info of an specific Country
+### Get info of an specific Country and it's soonest match
 
 ```bash
-$ wc18 --country=Japan # Japan is the name of the team desired to see stats
+$ wc18 --country=germany # Japan is the name of the team desired to see stats
 ```
 
 
 ### Get info of an specific Country plus all the matches
 
 ```bash
-$ wc18 --country=Russia --allmatches=True # Japan is the name of the team desired to see stats
+$ wc18 --country=Argentina --allmatches=True # Japan is the name of the team desired to see stats
 ```
 
  <p align="center">
-  <img src=https://i.imgur.com/qhKHdNW.gif" width="700px" />
+  <img src="https://i.imgur.com/FDLQ13Q.gif" width="700px" />
+</p>
+
+### Get info table of a group
+
+```bash
+$ wc18 --group=d # groups letter must be in lower case
+```
+
+<p align="center">
+  <img src="https://i.imgur.com/HqxSKO0.gif" width="700px" />
 </p>
 
 ### Help
+
 ```bash
 $ wc18 --help
 ```
+
 Todo
 ====
-- [ ] Add Group statistics
+- [x] Add Group statistics
 - [ ] Enable cache
 - [ ] Add  test cases
 - [ ] Add knockoff matches logic

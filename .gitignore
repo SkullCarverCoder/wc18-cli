@@ -23,3 +23,7 @@ Scripts/
 tcl/
 MANIFEST.in
 pip-selfcheck.json
+
+wc18/__pycache__/wc18.cpython-36.pyc
+
+wc18/__pycache__/teamsgroups.cpython-36.pyc
