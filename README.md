@@ -17,6 +17,8 @@ No need to get an API key! , wc18-cli uses a json file from [lsv fifa-worldcup-2
 
 ### Using `pip`
 
+<p> wc18-cli is only supported with python 3.6 due to the use of f-strings be aware before pip installing </p>
+
 ```bash
 $ pip install wc18-cli
 ```

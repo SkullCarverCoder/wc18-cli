@@ -197,7 +197,7 @@ def main(country, allmatches):
         else:
             click.echo('    Status: ' +
              click.style(stats['Status'], fg='red'))
-        click.echo('    Goals: ' + click.style(str(stats['Goals']), fg="blue", blink=True))
+        click.echo('    Goals: ' + click.style(str(stats['Goals']), fg="red", blink=True))
         click.echo('    Matches Won: ' +
          click.style(str(stats['Matches Won']), fg="yellow", bold=True))
         click.echo('    Matches Lost: ' +
