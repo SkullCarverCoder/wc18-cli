@@ -36,14 +36,14 @@ Usage
 ### Get info of an specific Country and it's soonest match
 
 ```bash
-$ wc18 --country=germany # Japan is the name of the team desired to see stats
+$ wc18 --country=germany # germany is the name of the team desired to see stats
 ```
 
 
 ### Get info of an specific Country plus all the matches
 
 ```bash
-$ wc18 --country=Argentina --allmatches=True # Japan is the name of the team desired to see stats
+$ wc18 --country=Argentina --allmatches=True # Argentina is the name of the team desired to see stats
 ```
 
  <p align="center">
