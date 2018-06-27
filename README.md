@@ -71,7 +71,7 @@ Todo
 - [x] Add Group statistics
 - [ ] Enable cache
 - [ ] Add  test cases
-- [ ] Add knockoff matches logic
+- [x] Add knockoff matches logic
 - [ ] Add watch for live score scraping from twitter
 
 <p> Feel free to contact me to my email for ideas and to fork this Repo! </p>
