@@ -46,26 +46,36 @@ def LoadStats(team):
     MatchesTied = 0
     for key in data['groups'].keys():
         if key == team.Group.lower() and data['groups'][key]['winner']:
-            if data['groups'][key]['winner'] == team.id:
+            if data['groups'][key]['winner'] == team.id or data['groups'][key]['runnerup'] == team.id:
                 Qualified = True
             else:
                 Qualified = False
+    if Qualified == True:
+        for key in data['knockout'].keys():
+            for match in data['knockout'][key]['matches']:
+                if  team.id == match['home_team'] or team.id == match['away_team'] and  match['winner']:
+                    if match['winner'] == team.id:
+                        Qualified = True
+                    else:
+                        Qualified = False
+                elif team.id == match['home_team'] or team.id == match['away_team']:
+                    Qualified = None
     for match in team._Matches:
-        if team.id == match['home_team'] and match['home_result']:
+        if team.id == match['home_team'] and match['home_result'] != None:
             GoalCount += match['home_result']
             if match['home_result'] > match['away_result'] and match['finished'] is True:
                 MatchesWon += 1
             elif match['home_result'] < match['away_result'] and match['finished'] is True:
                 MatchesLost += 1
-            elif match['finished'] is True:
+            elif match['home_result'] == match['away_result'] and match['finished'] is True:
                 MatchesTied +=1
-        elif team.id == match['away_team'] and match['away_result']:
+        elif team.id == match['away_team'] and match['away_result'] != None:
             GoalCount += match['away_result']
             if match['home_result'] > match['away_result'] and match['finished'] is True:
                 MatchesLost += 1
             elif match['home_result'] < match['away_result'] and match['finished'] is True:
                 MatchesWon += 1
-            elif match['finished'] is True:
+            elif match['home_result'] == match['away_result'] and match['finished'] is True:
                 MatchesTied +=1
     if Qualified is None:
         Qualified = 'Alive'

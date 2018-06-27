@@ -33,6 +33,10 @@ def LoadTeam(**kwargs):
                 if Nation_id == match['home_team'] or Nation_id == match['away_team']:
                     Nation_group = chr(ord('A') + c)
                     matchlist.append(match)
+        for i in reversed(range(1,5)):
+            for match in data['knockout']['round_'+str(2**i)]['matches']:
+                if Nation_id == match['home_team'] or Nation_id == match['away_team']:
+                    matchlist.append(match)
         return Team(Country, Nation_id, Nation_group, matchlist)
     elif 'ID' in kwargs:
         Nation_id = int(kwargs['ID'])
@@ -47,6 +51,10 @@ def LoadTeam(**kwargs):
             for match in data['groups'][chr(ord('a')+c)]['matches']:
                 if Nation_id == match['home_team'] or Nation_id == match['away_team']:
                     Nation_group = chr(ord('A') + c)
+                    matchlist.append(match)
+        for i in reversed(range(1,5)):
+            for match in data['knockout']['round_'+str(2**i)]['matches']:
+                if Nation_id == match['home_team'] or Nation_id == match['away_team']:
                     matchlist.append(match)
         return Team(Country, Nation_id, Nation_group, matchlist)
 
@@ -167,7 +175,9 @@ Matches:{" ".join(x for x in self.Matches)}'''
         timediff = now - min(dates, key=lambda d: abs(d - now))
         timediff = timediff.days
         if timediff > 1:
-            nearest = dates[dates.index(min(dates, key=lambda d: abs(d - now)))+1]
+            try: nearest = dates[dates.index(min(dates, key=lambda d: abs(d - now)))+1]
+            except:
+                 nearest = dates[dates.index(min(dates, key=lambda d: abs(d - now)))]
         else:
             nearest = min(dates, key=lambda d: abs(d - now))
         return nearest
