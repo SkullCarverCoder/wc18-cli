@@ -8,7 +8,7 @@ if os.environ.get('USER','') == 'vagrant':
 
 setup(
     name='wc18-cli',
-    version='0.0.1.5',
+    version='0.0.1.7',
     description='An easy command line interface for the 2018 World Cup',
     author='Juan Hernandez',
     license='MIT',

@@ -4,8 +4,9 @@ import click
 import json
 import importlib
 import sys
+import re
 
-file_dir = os.path.dirname("teamsgroups.py")
+file_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(file_dir)
 from teamsgroups import Team , Group , LoadTeam ,GetData
 
@@ -24,6 +25,120 @@ GROUPS = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h')
 data = GetData()
 
 # Load Team info for initialation of class
+def Bracket():
+    global data
+    count = dict((v, k) for k, v in COUNTRIES.items())
+    temp = list()
+    diff = 0
+    countries=list()
+    j=0
+    champ = None
+    for i in reversed(range(1,5)):
+        for match in data['knockout']['round_'+str(2**i)]['matches']:
+            if i ==1:
+                if match['winner'] != None:
+                    champ = count[match['winner']]
+            else:
+                h = match['home_team']
+                a = match['away_team']
+                if h > 32 or a >32:
+                    break
+                if h!= None:
+                    temp.append(count[h])
+                if a!=None:
+                    temp.append(count[a])
+
+                else:
+                    break
+    #this is ugly code believe me help here if you can
+        for i in range(0,16):
+            if len(temp[i]) < 16:
+                diff = 16-len(temp[i])
+                temp[i] = temp[i] + (diff * '_')
+                j+=1
+        try:
+            for i in range(16,24):
+                if len(temp[i]) < 21:
+                    diff = 21-len(temp[i])
+                    temp[i] = temp[i] + (diff * '_')
+                    j+=1
+            for i in range(24,28):
+                if len(temp[i]) < 20:
+                    diff = 20-len(temp[i])
+                    temp[i] = temp[i] + (diff * '_')
+                    j+=1
+            for i in range(28,30):
+                if len(temp[i]) < 21:
+                    diff = 21-len(temp[i])
+                    temp[i] = temp[i] + (diff * '_')
+                    j+=1
+        except:
+            while j < 24:
+                temp.append('Unknown______________')
+                j+=1
+            while j < 28:
+                temp.append('Unknown_____________')
+                j+=1
+            while j < 30:
+                temp.append('Unknown_______________')
+                j+=1
+    click.secho('''
+
+ _   __                 _      _____       _     _
+| | / /                | |    |  _  |     | |   | |
+| |/ / _ __   ___   ___| | __ | | | |_   _| |_  | |
+|    \\| '_ \\ / _ \\ / __| |/ / | | | | | | | __| | |
+| |\\  \\ | | | (_) | (__|   <  \\ \\_/ / |_| | |_  |_|
+\\_| \\_/_| |_|\\___/ \\___|_|\\_\\  \\___/ \\__,_|\\__| (_)
+
+''', fg="red")
+    ascii_graph = '''
+{0}
+                |
+                |{16}
+{1}|                     |
+                                      |
+{2}                      |{24}
+                |                     |                    |
+                |{17}|                    |
+{3}|                                          |
+                                                           |
+{4}                                           |
+                |                                          |____
+                |{18}                     |    |
+{5}|                     |                    |    |
+                                      |                    |    |
+{6}                      |{25}|    |
+                |                     |                         |
+                |{19}|                      ___|
+{7}|                                           |
+                                            {28}_
+                                                                  |
+{8}                                                  | CHAMP
+                |                           {29}|
+                |{20}                      |___
+{9}|                     |                         |
+                                      |                         |
+{10}                      |{26}     |
+                |                     |                    |    |
+                |{21}|                    |    |
+{11}|                                          |    |
+                                                           |    |
+{12}                                           |    |
+                |                                          |____|
+                |{22}                     |
+{13}|                     |                    |
+                                      |                    |
+{14}                      |{27}|
+                |                     |
+                |{23}|
+{15}|
+
+    '''.format(*temp)
+    if champ:
+        ascii_graph = ascii_graph.replace('CHAMP',champ)
+    print(ascii_graph)
+#end of ugly code
 
 def LoadGroup(letter):
     global data
@@ -61,6 +176,16 @@ def LoadStats(team):
                 elif team.id == match['home_team'] or team.id == match['away_team']:
                     Qualified = None
     for match in team._Matches:
+        try:
+            if team.id == match['home_team'] and match['home_penalty'] != None:
+                GoalCount += match['home_penalty']
+        except:
+            pass
+        try:
+            if team.id == match['away_team'] and match['away_penalty'] != None:
+                GoalCount += match['away_penalty']
+        except:
+            pass
         if team.id == match['home_team'] and match['home_result'] != None:
             GoalCount += match['home_result']
             if match['home_result'] > match['away_result'] and match['finished'] is True:
@@ -97,7 +222,8 @@ def LoadStats(team):
 # @click.option('--group', type=click.Choice(COUNTRIES.keys()), help='Show the stats of the country and its matches')
 @click.option('--allmatches', default=False ,help='Show the stats plus all the matches of the team')
 @click.option('--group', help="Show group table", type=click.Choice(GROUPS))
-def main(country, allmatches, group):
+@click.option('--bracket', default=True, help='Show the knockout bracket!')
+def main(country, allmatches, group,bracket):
     global data
     if country and allmatches:
         team = LoadTeam(Country=country, Data=data)
@@ -153,6 +279,8 @@ def main(country, allmatches, group):
         Group = LoadGroup(group)
         click.secho(Group.group_table_as_str(), fg="green")
         click.echo()
+    elif bracket:
+        Bracket()
 
 if __name__ == '__main__':
     main()

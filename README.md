@@ -60,6 +60,15 @@ $ wc18 --group=d # groups letter must be in lower case
   <img src="https://i.imgur.com/HqxSKO0.gif" width="700px" />
 </p>
 
+### Get bracket of knockout matches!
+
+```bash
+$ wc18 --bracket=True
+```
+
+<p align="center">
+  <img src="https://i.imgur.com/7CPOZrw.gif" width="700px" />
+</p>
 ### Help
 
 ```bash
