@@ -132,15 +132,14 @@ class Team():
             Matchdate = Matchdate.strftime("%A, %d. %B %Y %I:%M%p")
             spacer = "-" * 61
             if self.id == match['home_team']:
-                adversary = LoadTeam(ID=match['away_team'])
-                adversary = adversary.Nation
+                adversary = LoadTeam(ID=match['away_team']).Nation if match['away_team'] <=32 else 'Unknown'
                 Prompt = '  {0} vs {1}'.format(self.Nation,adversary)
                 if match['home_result'] != None or match['away_result'] != None:
                     Score = '{0} - {1}'.format(match['home_result'], match['away_result'])
                 else:
                     Score = '0 - 0'
             if self.id == match['away_team']:
-                adversary= LoadTeam(ID=match['home_team']).Nation
+                adversary= LoadTeam(ID=match['home_team']).Nation if match['home_team'] <=32 else 'Unknown'
                 Prompt = '  {0} vs {1}'.format(adversary,self.Nation)
                 if match['home_result'] != None or match['away_result'] != None:
                     Score = '{0} - {1}'.format(match['home_result'], match['away_result'])

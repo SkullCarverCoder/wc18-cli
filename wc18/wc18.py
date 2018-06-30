@@ -41,47 +41,48 @@ def Bracket():
             else:
                 h = match['home_team']
                 a = match['away_team']
-                if h > 32 or a >32:
-                    break
-                if h!= None:
+                if h is None:
+                    h = -1
+                if a is None:
+                    a = -1
+                if h <= 32 and h > 0:
                     temp.append(count[h])
-                if a!=None:
+                if a <= 32 and a > 0:
                     temp.append(count[a])
-
                 else:
                     break
     #this is ugly code believe me help here if you can
-        for i in range(0,16):
-            if len(temp[i]) < 16:
-                diff = 16-len(temp[i])
+    for i in range(0,16):
+        if len(temp[i]) < 16:
+            diff = 16-len(temp[i])
+            temp[i] = temp[i] + (diff * '_')
+            j+=1
+    try:
+        for i in range(16,24):
+            if len(temp[i]) < 21:
+                diff = 21-len(temp[i])
                 temp[i] = temp[i] + (diff * '_')
                 j+=1
-        try:
-            for i in range(16,24):
-                if len(temp[i]) < 21:
-                    diff = 21-len(temp[i])
-                    temp[i] = temp[i] + (diff * '_')
-                    j+=1
-            for i in range(24,28):
-                if len(temp[i]) < 20:
-                    diff = 20-len(temp[i])
-                    temp[i] = temp[i] + (diff * '_')
-                    j+=1
-            for i in range(28,30):
-                if len(temp[i]) < 21:
-                    diff = 21-len(temp[i])
-                    temp[i] = temp[i] + (diff * '_')
-                    j+=1
-        except:
-            while j < 24:
-                temp.append('Unknown______________')
+        for i in range(24,28):
+            if len(temp[i]) < 20:
+                diff = 20-len(temp[i])
+                temp[i] = temp[i] + (diff * '_')
                 j+=1
-            while j < 28:
-                temp.append('Unknown_____________')
+        for i in range(28,30):
+            if len(temp[i]) < 21:
+                diff = 21-len(temp[i])
+                temp[i] = temp[i] + (diff * '_')
                 j+=1
-            while j < 30:
-                temp.append('Unknown_______________')
-                j+=1
+    except:
+        while j < 24:
+            temp.append('Unknown______________')
+            j+=1
+        while j < 28:
+            temp.append('Unknown_____________')
+            j+=1
+        while j < 30:
+            temp.append('Unknown_______________')
+            j+=1
     click.secho('''
 
  _   __                 _      _____       _     _
